@@ -5,7 +5,6 @@ import { Button, Form } from 'shared/components';
 
 export const FormCont = styled.div`
   display: flex;
-  justify-content: center;
 `;
 
 export const FormElement = styled(Form.Element)`

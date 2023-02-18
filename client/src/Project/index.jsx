@@ -13,6 +13,7 @@ import IssueSearch from './IssueSearch';
 import IssueCreate from './IssueCreate';
 import ProjectSettings from './ProjectSettings';
 import { ProjectPage } from './Styles';
+import IssueList from './IssueList';
 
 const Project = () => {
   const match = useRouteMatch();
@@ -89,6 +90,11 @@ const Project = () => {
       <Route
         path={`${match.path}/settings`}
         render={() => <ProjectSettings project={project} fetchProject={fetchProject} />}
+      />
+
+      <Route
+        path={`${match.path}/list`}
+        render={() => <IssueList project={project} fetchProject={fetchProject} />}
       />
 
       {match.isExact && <Redirect to={`${match.url}/board`} />}

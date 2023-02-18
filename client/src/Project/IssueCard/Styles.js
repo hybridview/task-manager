@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { color, font, mixin } from 'shared/utils/styles';
@@ -22,12 +22,6 @@ export const Issue = styled.div`
   &:hover {
     background: ${color.backgroundLight};
   }
-  ${props =>
-    props.isBeingDragged &&
-    css`
-      transform: rotate(3deg);
-      box-shadow: 5px 10px 30px 0px rgba(9, 30, 66, 0.15);
-    `}
 `;
 
 export const Title = styled.p`
