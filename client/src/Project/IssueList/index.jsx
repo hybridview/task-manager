@@ -1,24 +1,23 @@
 import IssueCard from 'Project/IssueCard';
 import React, { Fragment } from 'react';
-import { Breadcrumbs } from 'shared/components';
-import { FormHeading } from './styles';
+import IssueModal from 'Project/IssueModal';
+import ProjectHeader from 'Project/ProjectHeader';
+import { ListContainer } from './styles';
 
-const IssueList = ({ project }) => {
+const IssueList = ({ project, fetchProject, updateLocalProjectIssues }) => {
   const issues = project.issues.map(issue => {
     return <IssueCard key={issue.id} issue={issue} projectUsers={project.users} />;
   });
 
-  const containerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  };
-
   return (
     <Fragment>
-      <Breadcrumbs items={['Projects', project.name, 'Issue List']} />
-      <FormHeading>Issue List</FormHeading>
-      <div style={containerStyle}>{issues}</div>
+      <ProjectHeader module="Projects" projectTitle={project.name} pageTitle="Issues List" />
+      <ListContainer>{issues}</ListContainer>
+      <IssueModal
+        projectUsers={project.users}
+        fetchProject={fetchProject}
+        updateLocalProjectIssues={updateLocalProjectIssues}
+      />
     </Fragment>
   );
 };

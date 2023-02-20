@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ProjectHeader from 'Project/ProjectHeader';
 
-import { ProjectCategory, ProjectCategoryCopy } from 'shared/constants/projects';
 import toast from 'shared/utils/toast';
 import useApi from 'shared/hooks/api';
-import { Form, Breadcrumbs } from 'shared/components';
 
-import { FormCont, FormHeading, FormElement, ActionButton } from './Styles';
+import { ProjectCategory, ProjectCategoryCopy } from 'shared/constants/projects';
+import { Form } from 'shared/components';
+import { FormCont, FormElement, ActionButton } from './Styles';
 
 const propTypes = {
   project: PropTypes.object.isRequired,
@@ -41,9 +42,11 @@ const ProjectSettings = ({ project, fetchProject }) => {
     >
       <FormCont>
         <FormElement>
-          <Breadcrumbs items={['Projects', project.name, 'Project Details']} />
-          <FormHeading>Project Details</FormHeading>
-
+          <ProjectHeader
+            module="Projects"
+            projectTitle={project.name}
+            pageTitle="Project Details"
+          />
           <Form.Field.Input name="name" label="Name" />
           <Form.Field.Input name="url" label="URL" />
           <Form.Field.TextEditor

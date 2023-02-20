@@ -5,6 +5,7 @@ import api from 'shared/utils/api';
 import useApi from 'shared/hooks/api';
 import { PageError, CopyLinkButton, Button, AboutTooltip } from 'shared/components';
 
+import { useParams } from 'react-router-dom';
 import Loader from './Loader';
 import Type from './Type';
 import Delete from './Delete';
@@ -19,7 +20,6 @@ import Dates from './Dates';
 import { TopActions, TopActionsRight, Content, Left, Right } from './Styles';
 
 const propTypes = {
-  issueId: PropTypes.string.isRequired,
   projectUsers: PropTypes.array.isRequired,
   fetchProject: PropTypes.func.isRequired,
   updateLocalProjectIssues: PropTypes.func.isRequired,
@@ -27,12 +27,12 @@ const propTypes = {
 };
 
 const ProjectBoardIssueDetails = ({
-  issueId,
   projectUsers,
   fetchProject,
   updateLocalProjectIssues,
   modalClose,
 }) => {
+  const { issueId } = useParams();
   const [{ data, error, setLocalData }, fetchIssue] = useApi.get(`/issues/${issueId}`);
 
   if (!data) return <Loader />;

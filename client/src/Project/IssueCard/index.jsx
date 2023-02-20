@@ -1,14 +1,12 @@
 import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import { IssueTypeIcon, IssuePriorityIcon } from 'shared/components';
 import { Issue, Title, Bottom, Assignees, AssigneeAvatar, IssueLink } from './Styles';
 
 function IssueCard({ projectUsers, issue }) {
-  const match = useRouteMatch();
   const assignees = issue.userIds.map(userId => projectUsers.find(user => user.id === userId));
 
   return (
-    <IssueLink to={`${match.url}/issues/${issue.id}`} data-testid="list-issue">
+    <IssueLink to={`issues/${issue.id}`} data-testid="list-issue">
       <Issue key={issue.id}>
         <Title>{issue.title}</Title>
         <Bottom>

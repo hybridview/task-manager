@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import NormalizeStyles from './NormalizeStyles';
 import BaseStyles from './BaseStyles';
 import Toast from './Toast';
-import Routes from './Routes';
+import ProjectRoutes from './ProjectRoutes';
 
 // We're importing .css because @font-face in styled-components causes font files
 // to be constantly re-requested from the server (which causes screen flicker)
@@ -15,7 +15,7 @@ const App = () => (
     <NormalizeStyles />
     <BaseStyles />
     <Toast />
-    <Routes />
+    <ProjectRoutes />
   </Fragment>
 );
 
