@@ -1,7 +1,6 @@
 import axios from 'axios';
-
-import history from 'browserHistory';
 import toast from 'shared/utils/toast';
+import { createBrowserHistory } from 'history';
 import { objectToQueryString } from 'shared/utils/url';
 import { getStoredAuthToken, removeStoredAuthToken } from 'shared/utils/authToken';
 
@@ -36,7 +35,7 @@ const api = (method, url, variables) =>
         if (error.response) {
           if (error.response.data.error.code === 'INVALID_TOKEN') {
             removeStoredAuthToken();
-            history.push('/authenticate');
+            createBrowserHistory().push('/authenticate');
           } else {
             reject(error.response.data.error);
           }

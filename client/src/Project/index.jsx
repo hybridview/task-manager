@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import useApi from 'shared/hooks/api';
 import { updateArrayItemById } from 'shared/utils/javascript';
-import { createQueryParamModalHelpers } from 'shared/utils/queryParamModal';
+import { useQueryParamHelper } from 'shared/utils/queryParamHelper';
 import { PageLoader, PageError, Modal } from 'shared/components';
 
 import NavbarLeft from './NavbarLeft';
@@ -18,8 +18,8 @@ import IssueList from './IssueList';
 const Project = () => {
   const navigate = useNavigate();
 
-  const issueSearchModalHelpers = createQueryParamModalHelpers('issue-search');
-  const issueCreateModalHelpers = createQueryParamModalHelpers('issue-create');
+  const issueSearchModalHelpers = useQueryParamHelper('issue-search');
+  const issueCreateModalHelpers = useQueryParamHelper('issue-create');
 
   const [{ data, error, setLocalData }, fetchProject] = useApi.get('/project');
 
