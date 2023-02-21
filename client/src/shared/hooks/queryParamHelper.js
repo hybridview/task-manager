@@ -12,9 +12,5 @@ export const useQueryParamHelper = param => {
   };
   const isOpen = () => param === searchParams.get('modal');
 
-  return {
-    open: () => open(),
-    close: () => close(),
-    isOpen: () => isOpen(),
-  };
+  return { open, close, isOpen };
 };

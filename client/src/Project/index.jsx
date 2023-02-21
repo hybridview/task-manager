@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import useApi from 'shared/hooks/api';
 import { updateArrayItemById } from 'shared/utils/javascript';
-import { useQueryParamHelper } from 'shared/utils/queryParamHelper';
+import { useQueryParamHelper } from 'shared/hooks/queryParamHelper';
 import { PageLoader, PageError, Modal } from 'shared/components';
 
 import NavbarLeft from './NavbarLeft';
