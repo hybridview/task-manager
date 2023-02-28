@@ -9,7 +9,7 @@
     "test:jest": "jest",
     "test:cypress": "node_modules/.bin/cypress open",
     "build": "rm -rf build && webpack --config webpack.config.production.js --progress",
-    "xxpre-commit": "lint-staged"
+    "pre-commit": "lint-staged"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
@@ -69,5 +69,12 @@
     "regenerator-runtime": "^0.13.3",
     "styled-components": "^4.4.1",
     "sweet-pubsub": "^1.1.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }

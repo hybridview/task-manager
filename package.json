@@ -1,17 +1,21 @@
 {
-  "name": "jira_clone",
-  "version": "1.0.0",
-  "author": "Ivor Reic",
-  "license": "MIT",
-  "scripts": {
-
-    "install-dependencies": "npm install && cd api && npm install && cd ../client && npm install",
-    "build": "cd api && npm run build && cd ../client && npm run build",
-    "start:production": "cd api && npm run start:production && cd ../client && npm run start:production"
-  },
-  "devDependencies": {
- 
-  },
- 
-  "dependencies": {}
+	"name": "jira_clone",
+	"version": "1.0.0",
+	"author": "Ivor Reic",
+	"license": "MIT",
+	"scripts": {
+		"pr_-_ommit": "cd api && npm run pr_-_ommit && cd ../client && npm run pr_-_ommit",
+		"install-dependencies": "npm install && cd api && npm install && cd ../client && npm install",
+		"build": "cd api && npm run build && cd ../client && npm run build",
+		"start:production": "cd api && npm run start:production && cd ../client && npm run start:production"
+	},
+	"devDependencies": {
+		"husky": "^8.0.3"
+	},
+	"_x_husky": {
+		"hooks": {
+			"pr_-_ommit": "npm run pr_-_ommit"
+		}
+	},
+	"dependencies": {}
 }

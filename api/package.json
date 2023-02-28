@@ -8,7 +8,7 @@
     "start:test": "cross-env NODE_ENV='test' DB_DATABASE='jira_test' npm start",
     "start:production": "pm2 start --name 'jira_api' node -- -r ./tsconfig-paths.js build/index.js",
     "build": "cd src && tsc",
-    "xxpre-commit": "lint-staged"
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -49,6 +49,12 @@
   },
   "_moduleDirectories": [
     "src"
-  ]
-  
+  ],
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
 }
