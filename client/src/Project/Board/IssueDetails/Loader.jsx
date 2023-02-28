@@ -7,8 +7,8 @@ const IssueDetailsLoader = () => (
       height={260}
       width={940}
       speed={2}
-      primaryColor="#f3f3f3"
-      secondaryColor="#ecebeb"
+      foregroundColor="#f3f3f3"
+      backgroundColor="#ecebeb"
     >
       <rect x="0" y="0" rx="3" ry="3" width="627" height="24" />
       <rect x="0" y="29" rx="3" ry="3" width="506" height="24" />
