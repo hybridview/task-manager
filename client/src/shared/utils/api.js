@@ -19,32 +19,35 @@ const defaults = {
 };
 
 const api = (method, url, variables) =>
-  new Promise((resolve, reject) => {
-    axios({
-      url: `${defaults.baseURL}${url}`,
-      method,
-      headers: defaults.headers(),
-      params: method === 'get' ? variables : undefined,
-      data: method !== 'get' ? variables : undefined,
-      paramsSerializer: objectToQueryString,
-    }).then(
-      response => {
-        resolve(response.data);
-      },
-      error => {
-        if (error.response) {
-          if (error.response.data.error.code === 'INVALID_TOKEN') {
-            removeStoredAuthToken();
-            createBrowserHistory().push('/authenticate');
-          } else {
-            reject(error.response.data.error);
-          }
-        } else {
-          reject(defaults.error);
-        }
-      },
-    );
-  });
+ axios({
+  url: `${defaults.baseURL}${url}`,
+  method,
+  headers: defaults.headers(),
+   params: method === 'get' ? variables : undefined,
+   data: method !== 'get' ? variables : undefined,
+   paramsSerializer: {
+     serialize: (params, options) => { return objectToQueryString(params, options) }, // mimic pre 1.x behavior and send entire params object to a custom serializer func. Allows consumer to control how params are serialized.
+     indexes: false // array indexes format (null - no brackets, false (default) - empty brackets, true - brackets with indexes)
+   },
+})
+.then(
+  response => {
+    return Promise.resolve(response.data);
+  },
+  error => {
+    if (error.response) {
+      if (error.response.data.error.code === 'INVALID_TOKEN') {
+        removeStoredAuthToken();
+        createBrowserHistory().push('/authenticate');
+      } else {
+        return Promise.reject(error.response.data.error);
+      }
+    } else {
+      return Promise.reject(defaults.error);
+    }
+  },
+);
+
 
 const optimisticUpdate = async (url, { updatedFields, currentFields, setLocalData }) => {
   try {

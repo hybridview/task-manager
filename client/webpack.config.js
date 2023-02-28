@@ -21,15 +21,19 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', { loader: 'css-loader' }],
       },
+      // {
+      //   test: /\.(jpe?g|png|gif|woff2?|eot|ttf|otf|svg)$/,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: { limit: 15000 },
+      //     },
+      //   ],
+      // },
       {
-        test: /\.(jpe?g|png|gif|woff2?|eot|ttf|otf|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: { limit: 15000 },
-          },
-        ],
-      },
+        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+        type: 'asset/resource',
+      }
     ],
   },
   resolve: {
