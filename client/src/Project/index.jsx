@@ -21,6 +21,9 @@ const Project = () => {
   const issueSearchModalHelpers = useQueryParamHelper('issue-search');
   const issueCreateModalHelpers = useQueryParamHelper('issue-create');
 
+  // setLocalData is made available here....
+  // fetchProject: Handle to internal useApi func that reloads project data from API and updates state.
+  // setLocalData: User defined function that updates current state vars with new values where useApi can merge it back to state.
   const [{ data, error, setLocalData }, fetchProject] = useApi.get('/project');
 
   if (!data) return <PageLoader />;
@@ -28,8 +31,10 @@ const Project = () => {
 
   const { project } = data;
 
+  // When project.issues change, we need to update state so issue change is visible.
   const updateLocalProjectIssues = (issueId, updatedFields) => {
-    setLocalData(currentData => ({
+    // ... setLocalData call here will cause mergeState to be called, which updates project state with new issue list.
+    setLocalData((currentData) => ({
       project: {
         ...currentData.project,
         issues: updateArrayItemById(currentData.project.issues, issueId, updatedFields),
@@ -64,7 +69,7 @@ const Project = () => {
           width={800}
           withCloseIcon={false}
           onClose={issueCreateModalHelpers.close}
-          renderContent={modal => (
+          renderContent={(modal) => (
             <IssueCreate
               project={project}
               fetchProject={fetchProject}

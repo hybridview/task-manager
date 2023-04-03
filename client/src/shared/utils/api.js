@@ -59,6 +59,8 @@ const optimisticUpdate = async (url, { updatedFields, currentFields, setLocalDat
   }
 };
 
+// In calling module, this can be set to name caller defines, such as "useApi"
+
 export default {
   get: (...args) => api('get', ...args),
   post: (...args) => api('post', ...args),

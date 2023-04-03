@@ -31,13 +31,20 @@ const propTypes = {
 const ProjectIssueSearch = ({ project }) => {
   const [isSearchTermEmpty, setIsSearchTermEmpty] = useState(true);
 
+  // NOTE: Since we dont expect to modify issues here, we dont use the setLocalData prop.
+
+  // useApi hook will fill data and isLoading internally for us.
+  // NOTE: fetchIssues does not need to be called for first query to API. A makeRequest is triggered internally with useEffect.
+  // When we call fetchIssues later, useApi.makeRequest is called and: data loaded from request query or from cache, and state saved.
+  //     Vars data and isLoading will then change during process.
+  //     Since state changes, UI re-render is triggered and we can handle changed data!
   const [{ data, isLoading }, fetchIssues] = useApi.get('/issues', {}, { lazy: true });
 
-  const matchingIssues = get(data, 'issues', []);
+  const matchingIssues = get(data, 'issues', []); // lodash
 
   const recentIssues = sortByNewest(project.issues, 'createdAt').slice(0, 10);
 
-  const handleSearchChange = value => {
+  const handleSearchChange = (value) => {
     const searchTerm = value.trim();
 
     setIsSearchTermEmpty(!searchTerm);

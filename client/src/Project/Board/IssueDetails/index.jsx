@@ -33,6 +33,14 @@ const ProjectBoardIssueDetails = ({
   modalClose,
 }) => {
   const { issueId } = useParams();
+
+
+  // ABM: Params of useApi
+  // data         => the mergable state, filled using ...state
+  // error        => a sub prop of variables set when mergeState is called when axios promise error called.
+  // setLocalData => pointer to the useCallback in query.js that handles getting updated state and merging it.
+  // fetchIssue   => pointer to the useCallback in query.js that is holding the axios GET request call.
+
   const [{ data, error, setLocalData }, fetchIssue] = useApi.get(`/issues/${issueId}`);
 
   if (!data) return <Loader />;
@@ -40,14 +48,14 @@ const ProjectBoardIssueDetails = ({
 
   const { issue } = data;
 
-  const updateLocalIssueDetails = fields =>
-    setLocalData(currentData => ({ issue: { ...currentData.issue, ...fields } }));
+  const updateLocalIssueDetails = (fields) =>
+    setLocalData((currentData) => ({ issue: { ...currentData.issue, ...fields } }));
 
-  const updateIssue = updatedFields => {
+  const updateIssue = (updatedFields) => {
     api.optimisticUpdate(`/issues/${issueId}`, {
       updatedFields,
       currentFields: issue,
-      setLocalData: fields => {
+      setLocalData: (fields) => {
         updateLocalIssueDetails(fields);
         updateLocalProjectIssues(issue.id, fields);
       },
@@ -60,7 +68,7 @@ const ProjectBoardIssueDetails = ({
         <Type issue={issue} updateIssue={updateIssue} />
         <TopActionsRight>
           <AboutTooltip
-            renderLink={linkProps => (
+            renderLink={(linkProps) => (
               <Button icon="feedback" variant="empty" {...linkProps}>
                 Give feedback
               </Button>
